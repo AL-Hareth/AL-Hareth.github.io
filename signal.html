@@ -4,15 +4,14 @@
 		<meta charset="UTF-8" />
 		<title>Comparator Meter</title>
 		<style>
-			a {
-					text-decoration: none;
-					color: #0895D1;
-
-			}
-
 			* {
 				    margin: 0;
 				    padding: 0;
+				}
+
+				a {
+					text-decoration: none;
+					color: #000;
 				}
 
 				body {
@@ -75,13 +74,13 @@
 		</style>
 	</head>
 	<body>
-		<h1>Comparator Meter</h1>
+		<h1><a href="./index.html">Comparator Meter</a></h1>
 <div class="container">
   <form>
     <lebel>Container: </label>
     <select id="containerType">
       <option value="3" id="furnace">Furnace</option>
-      <option value="5" id="brewingStand">Brewing Stand</option>
+      <option valaue="5" id="brewingStand">Brewing Stand</option>
       <option value="5" id="hopper">Hopper</option>
       <option value="5" id="hopperMinecart">Minecart with Hopper</option>
       <option value="9" id="dispencer">Dispenser/Dropper</option>
@@ -90,47 +89,30 @@
       <option value="27" id="shulkerBox">Shulker Box</option>
       <option value="54" id="doubleChest">Double Chest/Double Trapped Chest</option>
     </select>
-    <br />
-    <lable>Amount of Non-Stackable items: </lable><input id="1Amount" class="amount" type="number"/><br />
-    <lable>Amount of 16 Stacking items: </lable><input id="16Amount" class="amount" type="number"/><br />
-    <lable>Amount of 64 Stacking items: </lable><input id="64Amount" class="amount" type="number"/><br />
+    <select id="stackingType">
+			<option value="64">64 Stacking</option>
+			<option value="16">16 Stacking</option>
+		</select>
+		<br />
+		<br />
+		<label>Desired Signal: </label><input type="number" id="desiredSignal" class="amount" />
     <input type="submit" class="submit-button" value="calculate" />
   </form>
   <p id="result"></p>
-	<a href="./signal.html">Get items amount by signal</a>
 </div>
 
 		<script>
-			'use strict';
-var form = document.querySelector('form');
-var resultField = document.getElementById('result');
-var container;
+			// items required = max(desired signal strength, roundup((total slots in container * 64 / 14) * (desired signal strength - 1) ) )
 
-form.onsubmit = function(e) {
-    e.preventDefault()
-    container = Number(document.getElementById('containerType').value);
-    var NonStackingAmount = Number(document.getElementById('1Amount').value);
-    var _16StackingAmount = Number(document.getElementById('16Amount').value);
-    var _64StackingAmount = Number(document.getElementById('64Amount').value);
-    console.log(NonStackingAmount)
-    console.log(_16StackingAmount)
-    console.log(_64StackingAmount)
-    console.log(`container ${container}`)
-    var slotsFullness = ((NonStackingAmount / 1)+(_16StackingAmount / 16)+(_64StackingAmount / 64))
-    console.log(slotsFullness)
-    var signal = Math.floor(1+(slotsFullness / container) * 14)
-
-    if(signal > 15 || signal < 1 || slotsFullness == 0) {
-        alert("please enter correct values")
-    } else if(document.querySelector("select").selectedOptions[0].innerText == "Furnace" && NonStackingAmount > 2) {
-        alert("Furmaces can't contain more than 2 non-stackable items");
-    } else if(document.querySelector("select").selectedOptions[0].innerText == "Brewing Stand" && NonStackingAmount > 4) {
-        alert("Brewing stands cannot contain more than 4 Non-stackable items");
-    } else {
-        resultField.innerText = signal;
-    }
-};
-
+			document.querySelector("form").onsubmit = function(e) {
+				e.preventDefault();
+				var desiredSignal = Number(document.getElementById("desiredSignal").value);
+				var stackingType = Number(document.getElementById("stackingType").value);
+				var container = Number(document.getElementById("containerType").value);
+				console.log(`${desiredSignal} ${container} ${stackingType}`)
+				var items = Math.max(desiredSignal, Math.ceil((container * stackingType / 14) * (desiredSignal - 1)))
+				document.getElementById("result").innerText = "The amount of items required = " + items;
+			};
 		</script>
 	</body>
 </html>
