@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Comparator Meter</title>
+		<style>
+			a {
+					text-decoration: none;
+					color: #000;
+
+			}
+
+			.footer_link {
+				text-decoration: none;
+				color: #0895D1;
+				display: block;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+
+
+			* {
+				    margin: 0;
+				    padding: 0;
+				}
+
+				body {
+				    background-color: rgb(255, 248, 215);
+				    font-family: Arial;
+				    padding: 50px;
+				}
+
+				img {
+				    width: 100px;
+				    height: 100px;
+				}
+
+				h1 {
+				    text-align: center;
+				    display: inline-block;
+				    margin: 0 auto;
+				    position: relative;
+				    top: -37px;
+				    padding-top: 40px;
+				    padding-bottom: 40px;
+				    color: #222
+				}
+
+				.container {
+				    background-color: #FFF;
+				    padding: 20px 40px 50px;
+				    border-radius: 5px;
+				    box-shadow: 2px 2px 5px rgb(182, 171, 114)
+				}
+
+				.container form #containerType {
+				    width: 25%
+				}
+
+				.container form .amount {
+				    width: 25%;
+				    margin-top: 10px;
+				}
+
+				.container form .amount:focus::placeholder {
+				    opacity: 0;
+				}
+
+				.container form .submit-button {
+				    margin-top: 10px;
+				    margin-bottom: 10px;
+				    background-color: #0895D1;
+				    border: 1px solid #DDD;
+				    padding: 5px 10px;
+				    border-radius: 5px;
+				}
+
+				@media (max-width:580px) {
+				  .container form .amount,
+				  .container form #containerType {
+				    width: 100%;
+				  }
+				}
+		</style>
+	</head>
+	<body>
+		<h1><a href="./index.html">Comparator Meter</a></h1>
+		<div class="container">
+		  <form>
+		    <lebel>Stacking type: </label>
+		    <select id="stackingType">
+		      <option value="64">64 Stacking</option>
+		      <option value="16">16 Stacking</option>
+		    </select>
+		    <br />
+		    <label>Amount of items: </label><input type="number" id="amount"/>
+		    <input type="submit" class="submit-button" value="calculate" />
+		  </form>
+		  <p id="result"></p>
+			<a class="footer_link" href="./index.html">Get signal strength by items amount</a>
+			<a class="footer_link" href="./signal.html">Get items amount by desired signal</a>
+			<a class="footer_link" href="./stacks-to-items.html">Stacks to items</a>
+		</div>
+		<script>
+			document.querySelector("form").onsubmit = function(e) {
+				e.preventDefault();
+				var amount = Number(document.getElementById("amount").value);
+				var stackingType = Number(document.getElementById("stackingType").value);
+				if(stackingType == 64) {
+					if(amount <= 64) {
+						alert("Please enter more than a stack.")
+					} else {
+						var stacks = Math.floor(amount / 64);
+						var remaining = amount % 64
+						document.getElementById("result").innerText = `${stacks} stacks and ${remaining} items`;
+					}
+				} else {
+					if(amount <= 16) {
+						alert("Please enter more than a stack.");
+					} else {
+						var stacks = Math.floor(amount / 16);
+						var remaining = amount % 16;
+						document.getElementById("result").innerText = `${stacks} stacks and ${remaining} items`;
+					}
+				}
+			};
+		</script>
+	</body>
+</html>

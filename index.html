@@ -4,10 +4,12 @@
 		<meta charset="UTF-8" />
 		<title>Comparator Meter</title>
 		<style>
-			a {
-					text-decoration: none;
-					color: #0895D1;
-
+			.footer_link {
+				text-decoration: none;
+				color: #0895D1;
+				display: block;
+				padding-top: 10px;
+				padding-bottom: 10px;
 			}
 
 			* {
@@ -97,11 +99,12 @@
     <input type="submit" class="submit-button" value="calculate" />
   </form>
   <p id="result"></p>
-	<a href="./signal.html">Get items amount by signal</a>
+	<a class="footer_link" href="./signal.html">Get items amount by desired signal</a>
+	<a class="footer_link" href="./items-to-stacks.html">Items to stacks</a>
+	<a class="footer_link" href="./stacks-to-items.html">Stacks to items</a>
 </div>
 
 		<script>
-			'use strict';
 var form = document.querySelector('form');
 var resultField = document.getElementById('result');
 var container;

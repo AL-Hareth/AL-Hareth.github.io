@@ -14,6 +14,14 @@
 					color: #000;
 				}
 
+				.footer_link {
+					text-decoration: none;
+					color: #0895D1;
+					display: block;
+					padding-bottom: 10px;
+					padding-top: 10px;
+				}
+
 				body {
 				    background-color: rgb(255, 248, 215);
 				    font-family: Arial;
@@ -97,6 +105,9 @@
 		<br />
 		<label>Desired Signal: </label><input type="number" id="desiredSignal" class="amount" />
     <input type="submit" class="submit-button" value="calculate" />
+		<a class="footer_link" href="./index.html">Get signal strength by items amount</a>
+		<a class="footer_link" href="./items-to-stacks.html">Items to stacks</a>
+		<a class="footer_link" href="./stacks-to-items.html">Stacks to items</a>
   </form>
   <p id="result"></p>
 </div>
@@ -113,7 +124,7 @@
 				var items = Math.max(desiredSignal, Math.ceil((container * stackingType / 14) * (desiredSignal - 1)))
 				document.getElementById("result").innerText = "The amount of items required = " + items;
 			};
-			
+
 		</script>
 	</body>
 </html>
